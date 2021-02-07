@@ -80,6 +80,6 @@ stages:
         testResultsFormat: 'JUnit'
         testResultsFiles: '**/junitReport_*.xml'
         failTaskOnFailedTests: false
-        searchFolder: '$(System.DefaultWorkingDirectory)/postman'
+        searchFolder: '$(System.DefaultWorkingDirectory)/postman/results'
 
 
