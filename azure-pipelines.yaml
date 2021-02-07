@@ -70,10 +70,16 @@ stages:
 
     - task: CmdLine@2
       displayName: "Running PostMan Test"
-      continueOnError: false
+      continueOnError: true
       inputs:
         script: 'newman run StarterAPIs.json --reporters cli,junit --reporter-junit-export results\junitReport_$(Build.BuildId).xml'
         workingDirectory: '$(System.DefaultWorkingDirectory)/postman'
-
+    - task: PublishTestResults@2
+      displayName: "Publishing Test Results"
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/junitReport_*.xml'
+        failTaskOnFailedTests: false
+        searchFolder: '$(System.DefaultWorkingDirectory)/postman'
 
 
