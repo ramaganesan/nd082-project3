@@ -100,6 +100,7 @@ stages:
         backendAzureRmStorageAccountName: 'nd082tfstorage10556'
         backendAzureRmContainerName: 'nd082tfcontainer'
         backendAzureRmKey: '$(TF_VAR_STORAGE_ACCESS_KEY)'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
     - task: TerraformTaskV1@0
       inputs:
         provider: 'azurerm'
