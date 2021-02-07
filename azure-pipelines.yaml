@@ -85,3 +85,20 @@ stages:
         failTaskOnFailedTests: false
 
 
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    pool: Hosted Ubuntu 1604
+    steps:
+    - task: TerraformTaskV1@0
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        commandOptions: '-input=false -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)" -var "admin_username=$(TF_VAR_ADMIN_USERANME)" -var "admin_password=$(TF_VAR_ADMIN_PASSWORD)" -var "public_key=$(TF_VAR_PUBLIC_KEY)"'''
+        environmentServiceNameAzureRM: 'nd082-project3-terraform'
+
+        
+     
+
+
