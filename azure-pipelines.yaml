@@ -7,7 +7,6 @@ variables:
   TF_VAR_ARM_CLIENT_ID: $(client_id)
   TF_VAR_ARM_CLIENT_SECRET: $(client_secret)
   TF_VAR_ARM_TENANT_ID: $(tenant_id)
-  TF_VAR_STORAGE_ACCESS_KEY: $(access_key)
 stages:
 - stage: Build
   jobs:
