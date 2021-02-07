@@ -56,8 +56,7 @@ stages:
         backendAzureRmKey: '$(TF_VAR_STORAGE_ACCESS_KEY)'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         commandOptions: |
-          -input=false
-          -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)"
+          -input=false -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)"
 
 
 
