@@ -78,8 +78,7 @@ stages:
       displayName: "Publishing Test Results"
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '**/junitReport_*.xml'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/postman/results/junitReport_*.xml'
         failTaskOnFailedTests: false
-        searchFolder: '$(System.DefaultWorkingDirectory)/postman/results'
 
 
