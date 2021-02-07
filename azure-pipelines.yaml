@@ -72,7 +72,7 @@ stages:
       displayName: "Running PostMan Test"
       continueOnError: true
       inputs:
-        script: 'newman run StarterAPIs.json --reporters cli,junit --reporter-junit-export results\junitReport_$(Build.BuildId).xml'
+        script: 'newman run StarterAPIs.json --reporters cli,junit --reporter-junit-export $(System.DefaultWorkingDirectory)/postman/results/junitReport_$(Build.BuildId).xml'
         workingDirectory: '$(System.DefaultWorkingDirectory)/postman'
     - task: PublishTestResults@2
       displayName: "Publishing Test Results"
