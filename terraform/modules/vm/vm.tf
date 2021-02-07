@@ -19,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username      = "${var.admin_username}"
   admin_password      = "${var.admin_password}"
   disable_password_authentication = false
-  network_interface_ids = [nic.id]
+  network_interface_ids = [azurerm_network_interface.nic.id]
   admin_ssh_key {
     username   = "${var.admin_username}"
     public_key = "${var.public_key}"
