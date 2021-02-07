@@ -50,7 +50,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        backendServiceArm: 'nd082-project3-terraform'
+        environmentServiceNameAzureRM: 'nd082-project3-terraform'
         backendAzureRmResourceGroupName: 'nd082-tstate_rg'
         backendAzureRmStorageAccountName: 'nd082tfstorage10556'
         backendAzureRmContainerName: 'nd082tfcontainer'
