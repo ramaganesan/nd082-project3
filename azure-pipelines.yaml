@@ -34,10 +34,10 @@ stages:
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
     
-    - task: TerraformInstaller@0
-      displayName: "Terraform Install version 0.12.3"
-      inputs:
-        terraformVersion: '0.12.3'
+    #- task: TerraformInstaller@0
+     # displayName: "Terraform Install version 0.12.3"
+     # inputs:
+     #   terraformVersion: '0.12.3'
     
     - task: TerraformTaskV1@0
       inputs:
