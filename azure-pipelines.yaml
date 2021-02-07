@@ -30,7 +30,9 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
+    
     - task: TerraformInstaller@0
+      displayName: "Terraform Install version 0.12.3"
       inputs:
         terraformVersion: '0.12.3'
     
@@ -44,6 +46,7 @@ stages:
         backendAzureRmContainerName: 'nd082tfcontainer'
         backendAzureRmKey: '$(TF_VAR_STORAGE_ACCESS_KEY)'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+
     - task: TerraformTaskV1@0
       displayName: "Terraform Plan"
       inputs:
@@ -57,6 +60,20 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         commandOptions: |
           -input=false -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)"
+
+    - task: CmdLine@2
+      displayName: Install NewMan
+      continueOnError: false
+      inputs:
+        script: 'npm install newman'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/postman'
+
+    - task: CmdLine@2
+      displayName: "Running PostMan Test"
+      continueOnError: false
+      inputs:
+        script: 'newman run StarterAPIs.json --reporters cli,junit --reporter-junit-export results\junitReport_$(Build.BuildId).xml'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/postman'
 
 
 
