@@ -8,6 +8,8 @@ variables:
   TF_VAR_ARM_CLIENT_SECRET: $(client_secret)
   TF_VAR_ARM_TENANT_ID: $(tenant_id)
   TF_VAR_ADMIN_USERANME: $(admin_username)
+  TF_VAR_ADMIN_PASSWORD: $(admin_password)
+  TF_VAR_PUBLIC_KEY: $(public_key)
 stages:
 - stage: Build
   jobs:
@@ -60,7 +62,7 @@ stages:
         backendAzureRmKey: '$(TF_VAR_STORAGE_ACCESS_KEY)'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         commandOptions: |
-          -input=false -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)" -var "admin_username=$(TF_VAR_ADMIN_USERANME)"
+          -input=false -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)" -var "admin_username=$(TF_VAR_ADMIN_USERANME)" -var "admin_password=$(TF_VAR_ADMIN_PASSWORD)" -var "public_key=$(TF_VAR_PUBLIC_KEY)"
 
     - task: CmdLine@2
       displayName: Install NewMan
