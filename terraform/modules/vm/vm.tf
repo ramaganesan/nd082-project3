@@ -17,10 +17,12 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name = "${var.resource_group}"
   size                = "Standard_DS1_v2"
   admin_username      = "${var.admin_username}"
+  admin_password      = "${var.admin_password}"
+  disable_password_authentication = false
   network_interface_ids = [nic.id]
   admin_ssh_key {
     username   = "${var.admin_username}"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = "${var.public_key}"
   }
   os_disk {
     caching           = "ReadWrite"
