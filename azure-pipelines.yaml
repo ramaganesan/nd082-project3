@@ -59,7 +59,7 @@ stages:
           -input=false
           -backend=false
           -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" "client_id=$(TF_VAR_ARM_CLIENT_ID)" "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" 
-          "tenant_id=$(TF_VAR_ARM_TENANT_ID)" "access_key=$(TF_VAR_STORAGE_ACCESS_KEY)"
+          "tenant_id=$(TF_VAR_ARM_TENANT_ID)"
 
 
 
