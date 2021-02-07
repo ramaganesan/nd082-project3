@@ -18,7 +18,6 @@ terraform {
     storage_account_name = "nd082tfstorage10556"
     container_name       = "nd082tfstorage10556"
     key                  = "test/tf.state"
-    access_key           = "${var.access_key}"
   }
 }
 module "resource_group" {
