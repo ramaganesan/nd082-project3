@@ -58,8 +58,8 @@ stages:
         commandOptions: |
           -input=false
           -backend=false
-          -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" "client_id=$(TF_VAR_ARM_CLIENT_ID)" "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" 
-          "tenant_id=$(TF_VAR_ARM_TENANT_ID)"
+          -var="subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var="client_id=$(TF_VAR_ARM_CLIENT_ID)" -var="client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" 
+          -var="tenant_id=$(TF_VAR_ARM_TENANT_ID)"
 
 
 
