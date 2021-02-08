@@ -122,12 +122,14 @@ stages:
          deploy:
            steps:
              - task: AzureWebApp@1
-               displayName: 'Deploy Azure Web App'
                inputs:
-                 azureSubscription: $(subscription_id)
+                 azureSubscription: '$(weba_app_subscription)'
+                 appType: 'webApp'
                  appName: 'nd082project3-webapp'
-                 appType: webApp
-                 package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+                 package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
+                 deploymentMethod: 'auto'
+                 slotName: FREE
+
   
     - deployment: VM_Deployment_for_Selenium
       displayName: 'VM Deployment for Selenium'
