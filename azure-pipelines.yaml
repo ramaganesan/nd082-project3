@@ -41,6 +41,7 @@ stages:
      #   terraformVersion: '0.12.3'
     
     - task: TerraformTaskV1@0
+      displayName: 'Terraform Init'
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -86,9 +87,9 @@ stages:
         failTaskOnFailedTests: false
 
 
-- stage: Deploy
+- stage: Provision Terraform Resources
   jobs:
-  - job: Deploy
+  - job: Provision Terraform Resources
     pool: Hosted Ubuntu 1604
     steps:
     - task: TerraformTaskV1@0
@@ -109,7 +110,50 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         commandOptions: '-input=false -var "subscription_id=$(TF_VAR_ARM_SUBSCRIPTION_ID)" -var "client_id=$(TF_VAR_ARM_CLIENT_ID)" -var "client_secret=$(TF_VAR_ARM_CLIENT_SECRET)" -var "tenant_id=$(TF_VAR_ARM_TENANT_ID)" -var "admin_username=$(TF_VAR_ADMIN_USERANME)" -var "admin_password=$(TF_VAR_ADMIN_PASSWORD)" -var "public_key=$(TF_VAR_PUBLIC_KEY)"'''
         environmentServiceNameAzureRM: 'nd082-project3-terraform'
+        
+- stage: Deploy
+  jobs:
+    - deployment: FakeRestAPI
+      pool:
+        name: Hosted Ubuntu 1604
+      environment: 'test'
+      strategy:
+       runOnce:
+         deploy:
+           steps:
+             - task: AzureWebApp@1
+               displayName: 'Deploy Azure Web App'
+               inputs:
+                 azureSubscription: $(TF_VAR_ARM_SUBSCRIPTION_ID)
+                 appName: 'nd082project3-webapp'
+                 appType: webApp
+                 package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+  
+    - deployment: VM Deployment for Selenium
+      displayName: 'VM Deployment for Selenium'
+      environment:
+       name: 'test'
+       resourceType: VirtualMachine
+       tags: web
+      strategy:
+       runOnce:
+         deploy:
+           steps:
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: |
+                  #! /bin/bash
+                  sudo apt-get upgrade -y
+                  sudo apt-get update -y
+                  sudo apt-get install python3-pip -y
+                  sudo apt-get install unzip -y
+                  sudo apt-get install -y chromium-browser
+                  pip3 install selenium
+                  export PATH=$PATH:/usr/bin/chromium-browser 
 
+
+        
         
      
 
