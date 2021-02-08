@@ -126,7 +126,7 @@ stages:
                inputs:
                  azureSubscription: 'az-webapp-service-connection'
                  appType: 'webApp'
-                 appName: 'nd082project3-webapp'
+                 appName: 'nd082-project3-app-AppService'
                  package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
                  deploymentMethod: 'auto'
                  slotName: FREE
