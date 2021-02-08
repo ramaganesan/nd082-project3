@@ -129,7 +129,6 @@ stages:
                  appName: 'nd082-project3-app-AppService'
                  package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
                  deploymentMethod: 'auto'
-                 slotName: FREE
 
   
     - deployment: VM_Deployment_for_Selenium
