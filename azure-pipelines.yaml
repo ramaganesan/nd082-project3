@@ -87,9 +87,9 @@ stages:
         failTaskOnFailedTests: false
 
 
-- stage: Provision Terraform Resources
+- stage: Provision_Terraform_Resources
   jobs:
-  - job: Provision Terraform Resources
+  - job: Provision_Terraform_Resources
     pool: Hosted Ubuntu 1604
     steps:
     - task: TerraformTaskV1@0
@@ -129,7 +129,7 @@ stages:
                  appType: webApp
                  package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   
-    - deployment: VM Deployment for Selenium
+    - deployment: VM_Deployment_for_Selenium
       displayName: 'VM Deployment for Selenium'
       environment:
        name: 'test'
