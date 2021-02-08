@@ -123,7 +123,7 @@ stages:
            steps:
              - task: AzureWebApp@1
                inputs:
-                 azureSubscription: '$(weba_app_subscription)'
+                 azureSubscription: '$(web_app_subscription)'
                  appType: 'webApp'
                  appName: 'nd082project3-webapp'
                  package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
