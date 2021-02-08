@@ -10,6 +10,7 @@ variables:
   TF_VAR_ADMIN_USERANME: $(admin_username)
   TF_VAR_ADMIN_PASSWORD: $(admin_password)
   TF_VAR_PUBLIC_KEY: $(public_key)
+  azure_subcription: $(azure_subcription)
 stages:
 - stage: Build
   jobs:
@@ -123,7 +124,7 @@ stages:
            steps:
              - task: AzureWebApp@1
                inputs:
-                 azureSubscription: '$(web_app_subscription)'
+                 azureSubscription: '$(azure_subcription)'
                  appType: 'webApp'
                  appName: 'nd082project3-webapp'
                  package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
