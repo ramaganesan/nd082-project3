@@ -32,14 +32,20 @@ stages:
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
-      displayName: 'Upload Package'
+      displayName: 'Upload Rest API'
       artifact: drop-fakerestapi
     
-    #- task: TerraformInstaller@0
-     # displayName: "Terraform Install version 0.12.3"
-     # inputs:
-     #   terraformVersion: '0.12.3'
-    
+    - task: ArchiveFiles@2
+      displayName: 'Archive Selenium Script'
+      inputs:
+        rootFolderOrFile: $(System.DefaultWorkingDirectory)/selenium
+        includeRootFolder: false
+        archiveType: tar 
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium-test.tar'
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-selenium-test.tar'
+      displayName: 'Upload Selenium Test Package'
+      artifact: upload-selenium-test
+
     - task: TerraformTaskV1@0
       displayName: 'Terraform Init'
       inputs:
@@ -154,7 +160,7 @@ stages:
                   pip install --upgrade pip
                   pip3 install selenium
                   export PATH=$PATH:/usr/bin/chromium-browser
-                  cp $(Build.SourcesDirectory)/selenium/website_test.py ~/selenium
+                  cp $(Pipeline.Workspace)/upload-selenium-test/$(Build.BuildId)-selenium-test.tar ~/selenium
                   python ~/selenium/website_test.py True
 
 
