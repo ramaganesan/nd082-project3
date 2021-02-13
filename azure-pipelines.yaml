@@ -161,6 +161,7 @@ stages:
                   pip3 install selenium
                   export PATH=$PATH:/usr/bin/chromium-browser
                   cp $(Pipeline.Workspace)/upload-selenium-test/$(Build.BuildId)-selenium-test.tar ~/selenium
+                  tar -xvf ~/selenium/$(Build.BuildId)-selenium-test.tar
                   python ~/selenium/website_test.py True
 
 
