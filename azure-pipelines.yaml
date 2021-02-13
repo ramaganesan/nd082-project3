@@ -151,9 +151,10 @@ stages:
                   sudo apt-get install python3-pip -y
                   sudo apt-get install unzip -y
                   sudo apt-get install -y chromium-browser
+                  sudo apt-get install -y chromium-driver
                   pip install --upgrade pip
                   pip3 install selenium
-                  export PATH=$PATH:/usr/bin/chromium-browser
+                  export PATH=$PATH:/usr/bin/chromedriver
                   cp $(Build.SourcesDirectory)/selenium/website_test.py ~/selenium
                   python ~/selenium/website_test.py True
 

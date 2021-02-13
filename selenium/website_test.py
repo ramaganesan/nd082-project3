@@ -5,7 +5,6 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.common.exceptions import NoSuchElementException
 
 def setup(headlessmode):
-    
     if headlessmode == 'True' :
        options = ChromeOptions()
        options.add_argument("--headless") 
