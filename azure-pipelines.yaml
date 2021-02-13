@@ -10,7 +10,6 @@ variables:
   TF_VAR_ADMIN_USERANME: $(admin_username)
   TF_VAR_ADMIN_PASSWORD: $(admin_password)
   TF_VAR_PUBLIC_KEY: $(public_key)
-  azure_subcription: $(azure_subcription)
 stages:
 - stage: Build
   jobs:
