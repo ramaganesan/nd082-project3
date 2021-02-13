@@ -164,7 +164,7 @@ stages:
                   cp $(Build.SourcesDirectory)/selenium/website_test.py ~/selenium
                   cp $(Pipeline.Workspace)/upload-selenium-test/$(Build.BuildId)-selenium-test.tar ~/selenium
                   tar -xvf ~/selenium/$(Build.BuildId)-selenium-test.tar
-                  python ~/selenium/website_test.py True
+                  python3 ~/selenium/website_test.py True
 
 
         
