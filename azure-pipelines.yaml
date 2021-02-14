@@ -170,6 +170,7 @@ stages:
                   python3 ~/selenium/website_test.py True
 
 - stage: Load_Test
+  condition: always()
   jobs:
     - job: Run_Load_Test
       steps:
