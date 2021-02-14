@@ -161,7 +161,6 @@ stages:
                   pip install --upgrade pip
                   pip3 install selenium
                   export PATH=$PATH:/usr/bin/chromedriver
-                  cp $(Build.SourcesDirectory)/selenium/website_test.py ~/selenium
                   cp $(Pipeline.Workspace)/upload-selenium-test/$(Build.BuildId)-selenium-test.tar ~/selenium
                   tar -xvf ~/selenium/$(Build.BuildId)-selenium-test.tar
                   python3 ~/selenium/website_test.py True
