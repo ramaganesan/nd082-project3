@@ -10,6 +10,8 @@ variables:
   TF_VAR_ADMIN_USERANME: $(admin_username)
   TF_VAR_ADMIN_PASSWORD: $(admin_password)
   TF_VAR_PUBLIC_KEY: $(public_key)
+  RUN_TERRAFORM_TASK: $(run_terraform_task)
+  RUN_DEPLOY_TASK: $(run_deploy_task)
 stages:
 - stage: Build
   jobs:
@@ -94,6 +96,7 @@ stages:
 
 
 - stage: Provision_Terraform_Resources
+  condition: eq(variables.RUN_TERRAFORM_TASK,1)
   jobs:
   - job: Provision_Terraform_Resources
     pool: Hosted Ubuntu 1604
@@ -118,6 +121,7 @@ stages:
         environmentServiceNameAzureRM: 'nd082-project3-terraform'
         
 - stage: Deploy
+  condition: eq(variables.RUN_DEPLOY_TASK,1)
   jobs:
     - deployment: FakeRestAPI
       pool:
@@ -164,6 +168,20 @@ stages:
                   cp $(Pipeline.Workspace)/upload-selenium-test/$(Build.BuildId)-selenium-test.tar ~/selenium
                   tar -xvf ~/selenium/$(Build.BuildId)-selenium-test.tar
                   python3 ~/selenium/website_test.py True
+
+- stage: Load_Test
+  condition: always()
+  jobs:
+    - job: Run_Load_Test
+      steps:
+        - task: ApacheJMeterLoadTest@1
+          displayName: 'Running Load Test'
+          inputs:
+           TestDrop: '$(System.DefaultWorkingDirectory)/loadtest'
+           agentCount: 1
+           LoadTest: 'nd082-project3-azure-app-version3.jmx'
+           runDuration: 60
+           geoLocation: East US
 
 
         
