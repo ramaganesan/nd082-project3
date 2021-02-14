@@ -10,6 +10,8 @@ variables:
   TF_VAR_ADMIN_USERANME: $(admin_username)
   TF_VAR_ADMIN_PASSWORD: $(admin_password)
   TF_VAR_PUBLIC_KEY: $(public_key)
+  RUN_TERRAFORM_TASK: $(run_terraform_task)
+  RUN_DEPLOY_TASK: $(run_deploy_task)
 stages:
 - stage: Build
   jobs:
@@ -94,7 +96,7 @@ stages:
 
 
 - stage: Provision_Terraform_Resources
-  condition: eq($(run_terraform_task,1))
+  condition: eq(variables.RUN_TERRAFORM_TASK,1))
   jobs:
   - job: Provision_Terraform_Resources
     pool: Hosted Ubuntu 1604
@@ -119,7 +121,7 @@ stages:
         environmentServiceNameAzureRM: 'nd082-project3-terraform'
         
 - stage: Deploy
-  condition: eq($(run_deploy_task,1))
+  condition: eq(variables.RUN_DEPLOY_TASK,1))
   jobs:
     - deployment: FakeRestAPI
       pool:
