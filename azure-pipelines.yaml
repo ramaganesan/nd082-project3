@@ -94,6 +94,7 @@ stages:
 
 
 - stage: Provision_Terraform_Resources
+  condition: eq($(run_terraform_task,1))
   jobs:
   - job: Provision_Terraform_Resources
     pool: Hosted Ubuntu 1604
@@ -118,6 +119,7 @@ stages:
         environmentServiceNameAzureRM: 'nd082-project3-terraform'
         
 - stage: Deploy
+  condition: eq($(run_deploy_task,1))
   jobs:
     - deployment: FakeRestAPI
       pool:
