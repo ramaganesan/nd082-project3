@@ -165,6 +165,19 @@ stages:
                   tar -xvf ~/selenium/$(Build.BuildId)-selenium-test.tar
                   python3 ~/selenium/website_test.py True
 
+- stage: Load Test
+  jobs:
+    - job: Run_Load_Test
+      steps:
+        - task: ApacheJMeterLoadTest@1
+          displayName: 'Running Load Test'
+          inputs:
+           TestDrop: '$(System.DefaultWorkingDirectory)/loadtest'
+           agentCount: 1
+           LoadTest: 'nd082-project3-azure-app-version3.jmx'
+           runDuration: 60
+           geoLocation: East US
+
 
         
         
