@@ -165,7 +165,7 @@ stages:
                   tar -xvf ~/selenium/$(Build.BuildId)-selenium-test.tar
                   python3 ~/selenium/website_test.py True
 
-- stage: Load Test
+- stage: Load_Test
   jobs:
     - job: Run_Load_Test
       steps:
