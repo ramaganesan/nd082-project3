@@ -203,7 +203,7 @@ stages:
             jmeterPath: '$(JMeterInstaller.JMeterPath)'
             jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
             outputDir: 'taurus-output'
-            taurusArguments: modules.jmeter.properties.numThreads=10
+            taurusArguments: -o modules.jmeter.properties.numThreads=10
       - task: PublishTestResults@2
         displayName: 'Publishing JMeter Load Test'
         inputs:
