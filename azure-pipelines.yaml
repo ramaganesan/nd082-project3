@@ -206,6 +206,14 @@ stages:
             outputDir: 'taurus-output'
             taurusArguments: -o modules.jmeter.properties.numThreads=10
 
+      - task: PublishTestResults@2
+        displayName: 'Publishing JMeter Stress Test Results'
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)/taurus-output/Stress-Test-Results-$(Build.BuildId).xml'
+          testRunTitle: 'Publishing JMeter Load Test'
+          failTaskOnFailedTests: false
+      
       - task: TaurusRunner@0
         displayName: 'Running Endurance Test on API'
         inputs:
@@ -215,19 +223,19 @@ stages:
                     script: $(System.DefaultWorkingDirectory)/loadtest/nd082-project3-azure-app-endurance-test.jmx
                 reporting:
                 - module: junit-xml
-                  filename: taurus-output/Endurance-Test-Results-$(Build.BuildId).xml
+                  filename: taurus-output-endurance/Endurance-Test-Results-$(Build.BuildId).xml
             jmeterHome: '$(JMeterInstaller.JMeterHome)'
             jmeterPath: '$(JMeterInstaller.JMeterPath)'
             jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
-            outputDir: 'taurus-output'
+            outputDir: 'taurus-output-endurance'
             taurusArguments: -o modules.jmeter.properties.numThreads=10 -o modules.jmeter.properties.timeInSeconds=20
 
       - task: PublishTestResults@2
         displayName: 'Publishing JMeter Endurance Test Results'
         inputs:
           testResultsFormat: 'JUnit'
-          testResultsFiles: '$(System.DefaultWorkingDirectory)/taurus-output/*-$(Build.BuildId).xml'
-          testRunTitle: 'Publishing JMeter Load Test'
+          testResultsFiles: '$(System.DefaultWorkingDirectory)/taurus-output-endurance/Endurance-Test-Results-$(Build.BuildId).xml'
+          testRunTitle: 'Publishing JMeter Endurance Test'
           failTaskOnFailedTests: false
       
         
