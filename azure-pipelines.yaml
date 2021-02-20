@@ -205,6 +205,7 @@ stages:
             jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
             outputDir: 'taurus-output'
             taurusArguments: -o modules.jmeter.properties.numThreads=10
+            reportName: Stress-Test-Report
 
       - task: PublishTestResults@2
         displayName: 'Publishing JMeter Stress Test Results'
@@ -229,6 +230,7 @@ stages:
             jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
             outputDir: 'taurus-output-endurance'
             taurusArguments: -o modules.jmeter.properties.numThreads=10 -o modules.jmeter.properties.timeInSeconds=20
+            reportName: Endurance-Test-Report
 
       - task: PublishTestResults@2
         displayName: 'Publishing JMeter Endurance Test Results'
