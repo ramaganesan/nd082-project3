@@ -2,15 +2,20 @@
 import sys
 import os
 import logging
+import logging.handlers as handlers
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime
 
-logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(asctime)s - %(message)s')
+handler = handlers.SysLogHandler(address='/dev/log')
+logger = logging.getLogger('SeleniumTest')
+logger.setLevel(logging.DEBUG)
+logger.addHandler(handler)
+#logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(asctime)s - %(message)s')
 
 def log(message):
-    logging.info(message)
+    logger.info('SeleniumTest:' + message)
 
 def setup(headlessmode):
     if headlessmode == 'True' :
@@ -86,6 +91,7 @@ def removeitem_from_cart(driver):
     log("Successfully removed second item from Cart")
 
 def main():
+    log ('Starting the Selenium Test...')
     log ('Starting the browser...')
     if len(sys.argv[1]) > 1:
         headlessmode = sys.argv[1]
@@ -100,6 +106,7 @@ def main():
         login("standard_user","secret_sauce",driver)
         additem_to_cart(driver)
         removeitem_from_cart(driver)
+        log ('Selenium Test run ends')
     except Exception:
         driver.quit()
         log("Selenium Test failed")
