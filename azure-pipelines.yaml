@@ -214,7 +214,7 @@ stages:
           failTaskOnFailedTests: false
       
       - task: TaurusRunner@0
-        displayName: 'Running Stress Test on API'
+        displayName: 'Running Endurance Test on API'
         inputs:
             taurusConfig: |
                 execution:
@@ -227,7 +227,7 @@ stages:
             jmeterPath: '$(JMeterInstaller.JMeterPath)'
             jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
             outputDir: 'taurus-output'
-            taurusArguments: -o modules.jmeter.properties=$(System.DefaultWorkingDirectory)/loadtest/test.properties
+            taurusArguments: -o modules.jmeter.properties.numThreads=10 -o modules.jmeter.properties.timeInSeconds=20
       - task: PublishTestResults@2
         displayName: 'Publishing JMeter Stress Test'
         inputs:
