@@ -219,7 +219,7 @@ stages:
             taurusConfig: |
                 execution:
                 - scenario:
-                    script: $(System.DefaultWorkingDirectory)/loadtest/nd082-project3-azure-app.jmx
+                    script: $(System.DefaultWorkingDirectory)/loadtest/nd082-project3-azure-app-endurance-test.jmx
                 reporting:
                 - module: junit-xml
                   filename: taurus-output/Endurance-Test-Results-$(Build.BuildId).xml
@@ -227,7 +227,7 @@ stages:
             jmeterPath: '$(JMeterInstaller.JMeterPath)'
             jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
             outputDir: 'taurus-output'
-            taurusArguments: modules.jmeter.properties.numThreads=10
+            taurusArguments: -o modules.jmeter.properties=$(System.DefaultWorkingDirectory)/loadtest/test.properties
       - task: PublishTestResults@2
         displayName: 'Publishing JMeter Stress Test'
         inputs:
