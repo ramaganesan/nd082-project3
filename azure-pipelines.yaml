@@ -88,7 +88,7 @@ stages:
         script: 'newman run StarterAPIs.json --reporters cli,junit --reporter-junit-export $(System.DefaultWorkingDirectory)/postman/results/junitReport_$(Build.BuildId).xml'
         workingDirectory: '$(System.DefaultWorkingDirectory)/postman'
     - task: PublishTestResults@2
-      displayName: "Publishing Test Results"
+      displayName: "Publishing Postman Test Results"
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: '$(System.DefaultWorkingDirectory)/postman/results/junitReport_*.xml'
@@ -206,7 +206,7 @@ stages:
             outputDir: 'taurus-output'
             taurusArguments: -o modules.jmeter.properties.numThreads=10
       - task: PublishTestResults@2
-        displayName: 'Publishing JMeter Stress Test'
+        displayName: 'Publishing JMeter Stress Test Results'
         inputs:
           testResultsFormat: 'JUnit'
           testResultsFiles: '$(System.DefaultWorkingDirectory)/taurus-output/Stress-Test-Results-$(Build.BuildId).xml'
@@ -229,7 +229,7 @@ stages:
             outputDir: 'taurus-output'
             taurusArguments: -o modules.jmeter.properties.numThreads=10 -o modules.jmeter.properties.timeInSeconds=20
       - task: PublishTestResults@2
-        displayName: 'Publishing JMeter Stress Test'
+        displayName: 'Publishing JMeter Endurance Test Results'
         inputs:
           testResultsFormat: 'JUnit'
           testResultsFiles: '$(System.DefaultWorkingDirectory)/taurus-output/Endurance-Test-Results-$(Build.BuildId).xml'
