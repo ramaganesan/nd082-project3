@@ -18,10 +18,10 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${numThreads}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">20</stringProp>
+        <stringProp name="ThreadGroup.duration">${timeInSeconds}</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
@@ -40,6 +40,16 @@
             <elementProp name="acceptHeader" elementType="Argument">
               <stringProp name="Argument.name">acceptHeader</stringProp>
               <stringProp name="Argument.value">application/json</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="numThreads" elementType="Argument">
+              <stringProp name="Argument.name">numThreads</stringProp>
+              <stringProp name="Argument.value">${__P(numThreads)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="timeInSeconds" elementType="Argument">
+              <stringProp name="Argument.name">timeInSeconds</stringProp>
+              <stringProp name="Argument.value">${__P(timeInSeconds)}</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
           </collectionProp>
