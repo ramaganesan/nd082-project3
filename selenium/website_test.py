@@ -55,17 +55,15 @@ def get_total_cart_items_count(driver):
        return -1
 
 def additem_to_cart(driver):
-    log("Adding One Item to Cart")
-    driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child(1) .btn_primary").click();
-    log("Successfully added first item to Cart")
+    for i in range(1,7):
+        item = driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child({}) .inventory_item_name".format(i)).text;
+        log("Adding {} Item with name {}to Cart".format(i,item))
+        driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child({}) .btn_primary".format(i)).click();
+        log("Successfully added {} item to Cart".format(item))
 
-    log("Adding Second Item to Cart")
-    driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child(2) .btn_primary").click();
-    log("Successfully added Second item to Cart")
-
-    driver.find_element_by_css_selector("div[class=shopping_cart_container] > .shopping_cart_link").click();
+   ## driver.find_element_by_css_selector("div[class=shopping_cart_container] > .shopping_cart_link").click();
     cart_quantity = get_total_cart_items_count(driver);
-    if not cart_quantity or int(cart_quantity) != 2:
+    if not cart_quantity or int(cart_quantity) != 6:
        log("Error Items not added to Cart successfully")
        raise ValueError('Items not added to Cart')
     else:
@@ -73,22 +71,18 @@ def additem_to_cart(driver):
 
 def removeitem_from_cart(driver):
     log("Removing Items from Cart")
-    button1 = driver.find_element_by_css_selector("div[class=cart_list] > div[class=cart_item]:nth-child(3) .btn_secondary.cart_button");
-    button1.click();
-    cart_quantity_after_one_item_removed = get_total_cart_items_count(driver);
-    log("Cart Quantity after removing one item {}".format(cart_quantity_after_one_item_removed))
-    if int(cart_quantity_after_one_item_removed) == 2:
-       log('Unable to remove first item')
-       raise ValueError('Unable to remove item')
-
-    button2 = driver.find_element_by_css_selector("div[class=cart_list] > div[class=cart_item]:nth-child(4) .btn_secondary.cart_button");
-    button2.click();
+    for i in range(1,7):
+        item = driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child({}) .inventory_item_name".format(i)).text;
+        log("Removing {} Item with name {} from Cart".format(i,item))
+        button = driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child({}) .btn_secondary".format(i));
+        button.click();
+        log("Successfully removed {} item from Cart".format(item))
     cart_quantity_after_second_item_removed = get_total_cart_items_count(driver);
 
     if int(cart_quantity_after_second_item_removed) != -1:
-      log('Unable to remove Second item')
-      raise ValueError('Unable to remove item')  
-    log("Successfully removed second item from Cart")
+      log('Unable to Items from Cart')
+      raise ValueError('Unable to Items from Cart')  
+    log("Successfully removed all items from Cart")
 
 def main():
     log ('Starting the Selenium Test...')
