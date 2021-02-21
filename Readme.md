@@ -112,3 +112,9 @@ We also monitor the performance of the application during Load test using Azure 
 ![Azure Alert](screenshots/Azure_Monitor_1.JPG)
 
 ![Azure Alert Action](screenshots/Azure_Monitor_2.JPG)
+
+![Azure Alert Email](screenshots/Azure_Monitor_3.JPG)
+
+![Azure Alert Email](screenshots/Azure_Monitor_4.JPG)
+
+![Azure Alert Email](screenshots/Azure_Monitor_5.JPG)
