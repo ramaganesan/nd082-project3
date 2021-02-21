@@ -1,5 +1,11 @@
 # Table of Contents
 
+- **[Overview](#Overview)**
+- **[Terraform](#Terraform)**
+- **[PostMan for Application Testing](#PostMan-for-Application-Testing)**
+- **[Selenium for User Interface Testing](#Selenium-for-User-Interface-Testing)**
+
+
 ## Overview
 
 In this project we will use Azure DevOps to create a disposable test environment to run different automated tests on our application. We will use
@@ -75,3 +81,34 @@ To collect the output of the Selenium test we will be leveraging the Azure Log A
 
 The data output from the test is available as `project-submission-artifacts/query_data.csv`.
 
+## JMeter for Load Testing
+
+JMeter will be used for Load Testing. Load and Endurance testing will be run against the FakeRestAPI in the Load_Test stage of the Pipeline. Load test is run against the Activities Endpoint and Endurance Test is run against the Book Endpoint. The result of the Load Test will also be available as a Test Artifact and will be uploaded to the Test Results.
+
+![JMeter Load Test1](screenshots/Load_Stress_Test_1.JPG)
+
+![JMeter Load Test2](screenshots/Load_Stress_Test_2.JPG)
+
+![JMeter Load Test3](screenshots/Load_Stress_Test_3.JPG)
+
+![JMeter Load Test4](screenshots/Load_Stress_Test_4.JPG)
+
+![JMeter Endurance Test1](screenshots/Load_Endurance_Test_1.JPG)
+
+![JMeter Endurance Test2](screenshots/Load_Endurance_Test_2.JPG)
+
+![JMeter Endurance Test3](screenshots/Load_Endurance_Test_3.JPG)
+
+![JMeter Endurance Test4](screenshots/Load_Endurance_Test_4.JPG)
+
+![JMeter Test](screenshots/Load_Test_Artifact.JPG)
+
+The Load Test results are also available as `project-submission-artifacts/Stress-Test-Report.zip`, `project-submission-artifacts/Endurance-Test-Report.zip`.
+
+### Azure Monitoring
+
+We also monitor the performance of the application during Load test using Azure Monitor. We leverage the Azure App service Monitoring capabilities to generate custom alerts which can notify any infrastructure related issues.
+
+![Azure Alert](screenshots/Azure_Monitor_1.JPG)
+
+![Azure Alert Action](screenshots/Azure_Monitor_2.JPG)
