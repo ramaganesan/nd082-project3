@@ -57,7 +57,7 @@ def get_total_cart_items_count(driver):
 def additem_to_cart(driver):
     for i in range(1,7):
         item = driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child({}) .inventory_item_name".format(i)).text;
-        log("Adding {} Item with name {}to Cart".format(i,item))
+        log("Adding {} Item with name {} to Cart".format(i,item))
         driver.find_element_by_css_selector("div[class=inventory_list] > div[class=inventory_item]:nth-child({}) .btn_primary".format(i)).click();
         log("Successfully added {} item to Cart".format(item))
 
