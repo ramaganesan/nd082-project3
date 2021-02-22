@@ -15,7 +15,7 @@ logger.addHandler(handler)
 #logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"), format='%(asctime)s - %(message)s')
 
 def log(message):
-    logger.info('SeleniumTest:' + message)
+    logger.info('SeleniumTest: time={} message={}'.format(datetime.now(),message))
 
 def setup(headlessmode):
     if headlessmode == 'True' :
