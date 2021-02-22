@@ -74,15 +74,15 @@ Selenium test will be run during the Deploy stage of the pipeline.
 
 ![Azure Environment](screenshots/Test_Environment.JPG)
 
-### Azure Log Analytics
-
-To collect the output of the Selenium test we will be leveraging the Azure Log Analytics service. This service will be configured to collect the application events, in our case the system log output of the Selenium Test run.
-
 ![Selenium 5](screenshots/Selenium_Logs_5.JPG)
 
 ![Selenium 6](screenshots/Selenium_Logs_6.JPG)
 
 ![Selenium 7](screenshots/Selenium_Logs_7.JPG)
+
+### Azure Log Analytics
+
+To collect the output of the Selenium test we will be leveraging the Azure Log Analytics service. This service will be configured to collect the application events, in our case the system log output of the Selenium Test run.
 
 ![Selenium Log Query](screenshots/Selenium_Logs_1.JPG)
 
